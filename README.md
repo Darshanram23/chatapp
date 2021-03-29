@@ -26,7 +26,7 @@ class ChannelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Step 0 - inflate binding
+        
         binding = ActivityChannelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,7 +34,7 @@ class ChannelActivity : AppCompatActivity() {
             "Specifying a channel id is required when starting ChannelActivity"
         }
 
-        // Step 1 - Create three separate ViewModels for the views so it's easy
+        
         //          to customize them individually
         val factory = MessageListViewModelFactory(cid)
         val messageListHeaderViewModel: MessageListHeaderViewModel by viewModels { factory }
@@ -43,12 +43,12 @@ class ChannelActivity : AppCompatActivity() {
 
         // TODO set custom Imgur attachment factory
 
-        // Step 2 - Bind the view and ViewModels, they are loosely coupled so it's easy to customize
+       
         messageListHeaderViewModel.bindView(binding.messageListHeaderView, this)
         messageListViewModel.bindView(binding.messageListView, this)
         messageInputViewModel.bindView(binding.messageInputView, this)
 
-        // Step 3 - Let both MessageListHeaderView and MessageInputView know when we open a thread
+        
         // Note: the observe syntax used here requires Kotlin 1.4
         messageListViewModel.mode.observe(this) { mode ->
             when (mode) {
@@ -63,7 +63,7 @@ class ChannelActivity : AppCompatActivity() {
             }
         }
 
-        // Step 4 - Let the message input know when we are editing a message
+        
         binding.messageListView.setMessageEditHandler { message ->
             messageInputViewModel.editMessage.postValue(message)
         }
@@ -75,7 +75,7 @@ class ChannelActivity : AppCompatActivity() {
             }
         }
 
-        // Step 6 - Handle back button behaviour correctly when you're in a thread
+         
         val backHandler = {
             messageListViewModel.onEvent(MessageListViewModel.Event.BackButtonPressed)
         }
