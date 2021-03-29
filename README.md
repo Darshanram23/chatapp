@@ -49,7 +49,7 @@ class ChannelActivity : AppCompatActivity() {
         messageInputViewModel.bindView(binding.messageInputView, this)
 
         
-        // Note: the observe syntax used here requires Kotlin 1.4
+        
         messageListViewModel.mode.observe(this) { mode ->
             when (mode) {
                 is Thread -> {
@@ -68,7 +68,7 @@ class ChannelActivity : AppCompatActivity() {
             messageInputViewModel.editMessage.postValue(message)
         }
 
-        // Step 5 - Handle navigate up state
+        
         messageListViewModel.state.observe(this) { state ->
             if (state is NavigateUp) {
                 finish()
